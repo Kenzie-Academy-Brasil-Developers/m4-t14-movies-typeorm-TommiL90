@@ -36,7 +36,10 @@ const listMoviesController = async (
   // page = perPage * (page - 1);
 
   //sortBy: string, sortOrder: string, pageNumber: number, pageSize: number
-  const data = await paginatedListMoviesService(sort, order, page, perPage);
+  const data: {
+    items: tMovie[];
+    total: number
+  } = await paginatedListMoviesService(sort, order, page, perPage);
 
   // page = page / perPage + 1;
   const pages: number = Math.ceil(data.total / perPage);
