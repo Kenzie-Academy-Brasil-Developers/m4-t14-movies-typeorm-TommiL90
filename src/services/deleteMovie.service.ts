@@ -1,9 +1,9 @@
 import { AppDataSource } from "../data-source"
-import Movies from "../entities"
+import { Movie } from "../entities";
 
 const deleteMovieService = async (id: number): Promise<void> => {
 
-    const movieRepo = AppDataSource.getRepository(Movies)
+    const movieRepo = AppDataSource.getRepository(Movie)
 
     const movie = await movieRepo.findOne({
         where: {

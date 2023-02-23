@@ -1,6 +1,6 @@
 import { DeepPartial, Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
-import Movies from "../entities";
+import { Movie } from "../entities";
 import { tMovie, tMovieWithoutId } from "../interfaces";
 import { movieSchema } from "../schemas";
 
@@ -8,7 +8,7 @@ import { movieSchema } from "../schemas";
 
 const createMovieService = async (payload: tMovieWithoutId): Promise<tMovie> => {
 
-    const movieRepo: Repository<Movies> = AppDataSource.getRepository(Movies);
+    const movieRepo: Repository<Movie> = AppDataSource.getRepository(Movie);
     const movie = movieRepo.create(payload);
   
     await movieRepo.save(movie);

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { AppDataSource } from "../data-source";
-import Movies from "../entities";
+import { Movie }from "../entities";
 import { AppError } from "../error";
 import { tMovie } from "../interfaces";
 import { listMoviesService } from "../services";
@@ -13,7 +13,7 @@ const verifyNameExistMiddleware = async (
   const movieName: string = request.body.name;
   const idMovie: number = Number(request.params.id);
 
-  const userRepo = AppDataSource.getRepository(Movies);
+  const userRepo = AppDataSource.getRepository(Movie);
 
   const movie = await userRepo.findOneBy({ name: movieName });
 

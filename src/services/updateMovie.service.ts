@@ -1,13 +1,13 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
-import Movies from "../entities";
+import { Movie } from "../entities";
 import { tMovie } from "../interfaces";
 import { tMovieUpdate } from "../interfaces/movies.interfaces";
 import { movieSchema, updateMovieSChema } from "../schemas";
 
 const updateMovieService = async (payload: tMovieUpdate, id: number): Promise<tMovie> => {
 
-    const movieRepo: Repository<Movies> = AppDataSource.getRepository(Movies);
+    const movieRepo: Repository<Movie> = AppDataSource.getRepository(Movie);
     const movie = await movieRepo.findOneBy({
         id: id
     });
