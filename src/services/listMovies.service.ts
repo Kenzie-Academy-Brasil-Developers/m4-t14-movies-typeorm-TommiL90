@@ -4,7 +4,9 @@ import { tMovie } from "../interfaces";
 
 const listMoviesService = async (): Promise<tMovie[]> => {
     const userRepo = AppDataSource.getRepository(Movies);
-    return await userRepo.find();
+    const movieList = await userRepo.find({});
+
+    return movieList
   };
 
 export default listMoviesService  
