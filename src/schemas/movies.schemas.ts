@@ -9,8 +9,8 @@ export const movieSchema = z.object({
     price: z.number().positive().int()
 })
 
-export const createMovieSchema = movieSchema.omit({ 
+export const movieCreateSchema = movieSchema.omit({ 
     id: true
 })
 
-export const updateMovieSChema = createMovieSchema.partial()
+export const updateMovieSChema = movieCreateSchema.partial()

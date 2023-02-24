@@ -1,8 +1,8 @@
-import { movieSchema, createMovieSchema, updateMovieSChema } from "./movies.schemas"
+import { movieSchema, movieCreateSchema, updateMovieSChema } from "./movies.schemas"
 
 
 export {
     movieSchema,
-    createMovieSchema,
+    movieCreateSchema,
     updateMovieSChema
 }

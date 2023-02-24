@@ -11,14 +11,14 @@ import {
   verifyIdMiddleware,
   verifyNameExistMiddleware,
 } from "../middlewares";
-import { createMovieSchema, updateMovieSChema } from "../schemas";
+import { movieCreateSchema, updateMovieSChema } from "../schemas";
 
 const moviesRoutes: Router = Router();
 
 moviesRoutes.post(
   "",
   verifyNameExistMiddleware,
-  validateBodyMiddleware(createMovieSchema),
+  validateBodyMiddleware(movieCreateSchema),
   createMovieController
 );
 moviesRoutes.get("", listMoviesController);
