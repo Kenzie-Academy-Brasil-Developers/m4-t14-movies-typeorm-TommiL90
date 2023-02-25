@@ -6,31 +6,12 @@ const listMoviesController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  let perPage: number = Number(req.query.perPage) || 5;
-  let page: number = Number(req.query.page) || 1;
-  let sort: string = "id";
-  const sortParam: any = req.query.sort;
+  let page: number =  Number(req.query.page) > 0 ? Number(req.query.page) : 1 //Number(req.query.page) || 1;
+  let perPage: number = Number(req.query.perPage) > 0 ? Number(req.query.perPage) : 5;
+  let sort: any | undefined = req.query.sort;
 
-  if (typeof sortParam === "string") {
-    const lowercaseSortParam = sortParam.toLocaleLowerCase();
+  let order: any = req.query.order;
 
-    if (lowercaseSortParam === "price") {
-      sort = "price";
-    } else if (lowercaseSortParam === "duration") {
-      sort = "duration";
-    }
-  }
-
-  let order: string = "DESC";
-  const orderParam: any = req.query.order;
-
-  if (typeof orderParam === "string") {
-    const uppercaseOrderParam = orderParam.toUpperCase();
-
-    if (uppercaseOrderParam === "ASC") {
-      order = "ASC";
-    }
-  }
 
   // perPage = perPage > 5 ? 5 : perPage;
   // page = perPage * (page - 1);
@@ -41,19 +22,20 @@ const listMoviesController = async (
     total: number
   } = await paginatedListMoviesService(sort, order, page, perPage);
 
+
   // page = page / perPage + 1;
   const pages: number = Math.ceil(data.total / perPage);
 
   const baseURL: string = "http://localhost:3000/movies";
   const prevPage: string | null =
-    page - 1 < 1 ? null : `${baseURL}?page=${page - 1}&perPage=${perPage}`;
+    page === 1 ? null : `${baseURL}?page=${page - 1}&perPage=${perPage}`;
   const nextPage: string | null =
     page + 1 > pages ? null : `${baseURL}?page=${page + 1}&perPage=${perPage}`;
 
   const pagination = {
-    prevPage,
     nextPage,
-    pages,
+    prevPage,
+    // pages,
     count: data.total,
     data: data.items,
   };

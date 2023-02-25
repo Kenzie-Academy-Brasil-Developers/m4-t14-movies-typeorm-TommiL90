@@ -17,7 +17,7 @@ const verifyIdMiddleware = async (
     const movie = await movieRepo.findOneBy({ id: idMovie });
 
     if (!movie) {
-        throw new AppError("Movie is not exists.", 400);
+        throw new AppError("Movie not found", 404);
       }
   
     return next();

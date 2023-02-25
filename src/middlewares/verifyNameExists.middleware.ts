@@ -21,18 +21,18 @@ const verifyNameExistMiddleware = async (
 
     if(movieName){
 
-      const listMovies: tMovie[] = await listMoviesService();
-      const filteredList: tMovie[] = listMovies.filter(
-        (movie) => movie.id !== idMovie
-      );
+      // const listMovies: tMovie[] = await listMoviesService();
+      // const filteredList: tMovie[] = listMovies.filter(
+      //   (movie) => movie.id !== idMovie
+      // );
   
-      const nameExists: boolean = filteredList.some(
-        (el) => el.name === movieName
-      );
+      // const nameExists: boolean = filteredList.some(
+      //   (el) => el.name === movieName
+      // );
   
-      if (nameExists) {
+      if (movie) {
         throw new AppError(
-          "name already registered in other registered movie",
+          "Movie already exists.",
           409
         );
       }
@@ -42,7 +42,7 @@ const verifyNameExistMiddleware = async (
   }
 
   if (movie) {
-    throw new AppError("Movie already registered", 409);
+    throw new AppError("Movie already exists.", 409);
   }
 
   return next();

@@ -11,7 +11,7 @@ const updateMovieController = async (
    
     const updateMovie: tMovie  = await updateMovieService(data, id);
   
-    return res.status(201).json(updateMovie);
+    return res.status(200).json(updateMovie);
   };
   
 export default updateMovieController
