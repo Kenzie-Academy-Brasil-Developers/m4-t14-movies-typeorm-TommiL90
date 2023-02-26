@@ -7,7 +7,8 @@ const listMoviesController = async (
   res: Response
 ): Promise<Response> => {
   let page: number =  Number(req.query.page) > 0 ? Number(req.query.page) : 1 //Number(req.query.page) || 1;
-  let perPage: number = Number(req.query.perPage) > 0 ? Number(req.query.perPage) : 5;
+  let perPage: number = Number(req.query.perPage) > 0 && Number(req.query.perPage) <= 5 ?
+  Number(req.query.perPage) : 5
   let sort: any | undefined = req.query.sort;
 
   let order: any = req.query.order;
